@@ -1,0 +1,18 @@
+#persistent volume config PVC
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-voll
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+  #ReadOnlyMany
+  #ReadWriteOnce
+  #ReadWriteMany
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  awsElasticBlockStore:
+    #kubectl get persistentvolume
+    volumeID: [$volume-id]
+    fsType: ext4
