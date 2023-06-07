@@ -1,0 +1,15 @@
+#secure pod deployment
+#image: docker.io/library/nginx and image:nginx are the same path
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    #image:  private-registry.io/apps/internal-app below is an example of a privately hosted image
+    #make sure to do a 'kubectl create secret docker-registry regcred' to auth to your own private registry
+    #mine is store at ./template_regcred
+    image:  private-registry.io/apps/internal-app
+  imagePullSecrets:
+  - name: regcred
