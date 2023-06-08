@@ -1,0 +1,17 @@
+#pvc with define static claim
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: nginx
+      image: nginx:alpine
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: local-pvc-volume
+  volumes:
+    - name: local-pvc-volume
+      persistentVolumeClaim:
+      #this value ensures their pvc is claimed by name if set to 'waitforconsumer'
+        claimName: local-pvc
