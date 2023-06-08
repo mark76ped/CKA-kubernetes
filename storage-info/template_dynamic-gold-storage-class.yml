@@ -1,0 +1,18 @@
+#create a dynamic storage definition
+#Gold will be for a mid tier class of storage, better than standard 
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  #ensure the name 'gold' matches in the PVC definition
+  name: gold
+#AWS EFS: efs.csi.aws.com
+#AWS: EBS: ebs.csi.aws.com
+#GCP: kubernetes.io/gce-pd
+provisioner: kubernetes.io/gce-pd
+parameters:
+  #pd-ssd
+  #pd-standard (HDD)
+  type: pd-ssd
+  #none
+  #regional-pd
+  replication-type: none
