@@ -1,0 +1,36 @@
+#useful K8s commands for networking
+
+kubectl get nodes -o wide
+
+ip a | grep -B2 192.23.97.3
+
+#identify the container runtime endpoint value is set for Kubernetes.
+ps aux | grep kubelet | grep --color container-runtime-endpointi
+
+kubectl get pods -o wide
+
+kubectl get service
+
+kube-api-server --service-cluster-ip-range ipNet #default 10.0.0.0/24
+
+ps aux | grep kube-api-server
+
+iptables -L -t nat | grep db-service
+
+cat /var/log/kube-proxy.log
+
+kubectl logs pods -n kube-system {$pod.name}
+
+kubectl get all --all-namespaces
+
+kubectl get configmap -n kube-system
+
+cat /etc/coredns/Corefile
+
+cat /etc/resolv.conf
+
+kubectl get service -n kube-system
+
+cat /var/lib/kubelet/config.yaml
+
+kubectl describe ingress ${ingress.name} -n $[namespace]

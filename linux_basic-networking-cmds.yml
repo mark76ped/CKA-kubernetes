@@ -1,0 +1,23 @@
+#list of useful linux commands for networking in Kubernetes
+
+ip link
+
+ip addr
+
+ip addr add 192.168.1.10-24 dev eth0
+
+ip route
+#sets a route having all traffic in the "192.168.1.0 - 192.168.1.254" network route to 192.168.2.1
+ip route add 192.168.1.0/24 via 192.168.2.1
+
+#checking the temporary setting for IP forwarding
+cat /proc/sys/net/ipv4/ip_forward
+
+arp
+
+netstat -plnt
+
+route
+#check number of port connections 
+netstat -anp | grep etcd
+
