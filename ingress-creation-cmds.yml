@@ -1,0 +1,20 @@
+
+#create namespace for ingress controller
+kubectl create namespace ingress-nginx
+
+#create configmap within that same namespace
+kubectl create configmap ingress-nginx -n ingress-nginx
+
+#The NGINX Ingress Controller requires two ServiceAccounts with name ingress-nginx and ingress-nginx-admission in the ingress-nginx namespace.
+kubectl create serviceaccount ingress-nginx -n ingress-nginx
+kubectl create serviceaccount ingress-nginx-admission -n ingress-nginx
+
+
+#expose the ingress to for outside users
+kubectl expose deploy ingress-controller -n ingress-nginx --name ingress --port=80 --target-port=80 --type NodePort
+
+#check to see service status
+kubectl get svc -n ingress-nginx
+
+#create ruleset for selected applications
+kubectl create ingress ingress-wear-watch -n app-space --rule="/wear=wear-service:8080" --rule="/watch=watch-service:8080"
